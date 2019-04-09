@@ -185,8 +185,8 @@ function createCollectionTable(table, array) {
 
 function victory(winner) {
   setTimeout(function() {
-    var reload = confirm("Winner: " + winner.toUpperCase() + "\n\nNew game?");
-    if (reload == true) {location.reload()}}, 50);
+    var reload = setTimeout(function() {confirm("Winner: " + winner.toUpperCase() + "\n\nNew game?")}, 100);
+    if (reload == true) {location.reload()}}, 100);
 
 }
 
