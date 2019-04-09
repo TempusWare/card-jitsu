@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Card-Jitsu</title>
+    <script type="text/javascript" src="setup.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+  </head>
+  <body>
+    <p>Bot's Cards</p>
+    <p id="botCards">no cards here</p>
+    <div id="battle">
+      <table><tr id="battleCards"></tr></table>
+    </div>
+    <div id="deck">
+      <table><tr id="cardsDealt"></tr></table>
+      <img id="backdrop" src="images/deck.svg">
+    </div>
+    <div class="collection" id="playerContainer">
+      <table><tr id="playerCollection"></tr></table>
+    </div>
+    <div class="collection" id="botContainer">
+      <table><tr id="botCollection"></tr></table>
+    </div>
+    <!--<p>Battle:</p>-->
+    <div id="winnerCon">
+      <p id="winner"></p>
+    </div>
+    <!--<div id="battle">
+      <table><tr id="battleCards"></tr></table>
+      <div id="shadow"></div>
+    </div>-->
+  </body>
+</html>
+<script type="text/javascript" src="design.js"></script>
+<style media="screen">
+  body {
+    background-image: url("images/dojo.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  div#winnerCon {
+    position: absolute;
+    width: 99%;
+    height: 5vh;
+    z-index: 3;
+    top: 0;
+  }
+  p#winner {
+    text-align: center;
+    font-size: 4vh;
+    font-family: Arial;
+    color: white
+  }
+  div.collection {
+    position: absolute;
+    top: .5vw;
+    z-index: -1;
+  }
+  div#playerContainer {
+    float: left;
+    left: 1vw;
+  }
+  div#botContainer {
+    float: right;
+    right: 1vw
+  }
+  div.collection table tr div {
+    display: inline-block;
+  }
+  div#deck {
+    position: absolute;
+    bottom: 0;
+    width: 99%;
+    height: 21.5vw;
+    padding-top: 5vw;
+    overflow: hidden;
+  }
+  div#deck table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 86.78vw;
+    height: 18vw
+  }
+  div#deck img#backdrop {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  div#battle {
+    position: absolute;
+    width: 99%;
+    height: 18vw;
+    top: 5vw
+  }
+  div#battle table {
+    margin-left: auto;
+    margin-right: auto;
+    height: 18vw;
+    width: 33.312vw;
+  }
+  /*div#deck div#backdrop {
+    background-image: url("images/deck.svg");
+    position: absolute;
+    height: 25vh;
+    width: 100vw;
+    bottom: 0;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: contain
+  }*/
+  /*div#battle {
+    width: 100%;
+    height: 100%
+  }
+  div#shadow {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none
+  }
+  div#battle table {
+    z-index: 4;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+  }*/
+  tr#playerCollection div, tr#botCollection div {
+    width: 5vw;
+    position: relative;
+  }
+  div img.frameIcon, div img.elementIcon {
+    width: 100%;
+    height: 100%
+  }
+  div img.elementIcon {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    z-index: 1;
+    transform: scale(0.8);
+  }
+  tr#cardsDealt td, tr#battleCards td {
+    padding-left: .7vw;
+    padding-right: .7vw
+  }
+  tr#cardsDealt div, tr#battleCards div {
+    width: 15.956vw;
+    height: 18vw;
+    position: relative;
+    transition: .25s ease
+  }
+  div img.art, div img.frame {
+    width: 100%;
+    height: 100%
+  }
+  div img.art {
+    border-radius: 2vw
+  }
+  div img.frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1
+  }
+  div img.element {
+    position: absolute;
+    z-index: 2;
+    top: 0.5vw;
+    left: 0.5vw;
+    width: 4vw
+  }
+  div img.power {
+    position: absolute;
+    z-index: 2;
+    top: 4.75vw;
+    left: 1vw;
+    width: 3vw
+  }
+  tr#cardsDealt div:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+  tr#cardsDealt div:active {
+    opacity: 0
+  }
+</style>
