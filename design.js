@@ -1,10 +1,10 @@
 // Create the table of cards
 function updateTable() {
-  var botDeck = document.getElementById("botCards");
+  /*var botDeck = document.getElementById("botCards");
   botDeck.innerHTML = " ";
   for (var i = 0; i < botCards.length; i++) {
     botDeck.innerHTML += cards[botCards[i]].element + " "
-  };
+  };*/
   // Clear table
   var table = document.getElementById("cardsDealt");
   while (table.firstChild) {
@@ -184,7 +184,10 @@ function createCollectionTable(table, array) {
 }
 
 function victory(winner) {
-  setTimeout(function() {alert("Winner: " + winner.toUpperCase() + "\n\nRefresh tab for new game" )}, 50);
+  setTimeout(function() {
+    var reload = confirm("Winner: " + winner.toUpperCase() + "\n\nNew game?");
+    if (reload == true) {location.reload()}}, 50);
+
 }
 
 // Display player's chosen card next to bot's chosen card
