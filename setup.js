@@ -202,13 +202,11 @@ function pickCard(number) {
   // Judge the player's card against the bot's card
   judge();
   // Replace the cards used with new cards
-  //setTimeout(function() {updateTable()}, 1000);
   playerCards[number] = dealCards();
   botCards[number] = dealCards();
 
   // DISPLAY: Update table of cards
   try {
-    //setTimeout(function() {updateTable()}, 1000);
     updateTable();
   } catch (e) {} finally {};
 };
@@ -364,6 +362,7 @@ function result(winner, cardId) {
   if (winner === "bot") {
     botCollection.push(cardId);
     checkforWinner(winner);
+    //hasBotWon = true
   };
 
   // If it was a tie
