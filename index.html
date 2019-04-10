@@ -9,35 +9,70 @@
   <body>
     <!--<p>Bot's Cards</p>
     <p id="botCards">no cards here</p>-->
-    <div id="battle">
-      <table><tr id="battleCards"></tr></table>
-    </div>
-    <div id="deck">
-      <table><tr id="cardsDealt"></tr></table>
-      <img id="backdrop" src="images/deck.svg">
+    <div id="deckAndBattle">
+      <div id="winnerCon">
+        <p id="winner"></p>
+      </div>
+      <div id="battle">
+        <div><div id="battleCards"></div></div>
+      </div>
+      <img src="images/deck-lid.svg">
+      <div id="deck">
+        <div><div id="cardsDealt"></div></div>
+      </div>
     </div>
     <div class="collection" id="playerContainer">
-      <table><tr id="playerCollection"></tr></table>
+      <div>
+        <div id="pcolFire"></div>
+        <div id="pcolSnow"></div>
+        <div id="pcolWater"></div>
+      </div>
     </div>
     <div class="collection" id="botContainer">
-      <table><tr id="botCollection"></tr></table>
+      <div>
+        <div id="bcolFire"></div>
+        <div id="bcolSnow"></div>
+        <div id="bcolWater"></div>
+      </div>
     </div>
-    <!--<p>Battle:</p>-->
-    <div id="winnerCon">
-      <p id="winner"></p>
+    <div id="gameEnd">
+      <p>Winner Text</p>
+      <p id="newGame">New game in 3...</p>
     </div>
-    <!--<div id="battle">
-      <table><tr id="battleCards"></tr></table>
-      <div id="shadow"></div>
-    </div>-->
   </body>
 </html>
 <script type="text/javascript" src="design.js"></script>
 <style media="screen">
+  * {
+    user-select: none;
+  }
   body {
     background-image: url("images/dojo.svg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: top;
+    background-size: auto;
+    overflow: hidden;
+  }
+  div#gameEnd {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 6;
+    display: none;
+    left: 0;
+    top: 0;
+    padding-top: 30vh;
+  }
+  div#gameEnd > p {
+    font-size: 10vh;
+    text-align: center;
+    color: white;
+    font-family: Arial;
+    text-shadow: 0 0 5vh black;
+  }
+  div#gameEnd > p#newGame {
+    font-size: 5vh;
   }
   div#winnerCon {
     position: absolute;
@@ -45,6 +80,7 @@
     height: 5vh;
     z-index: 3;
     top: 0;
+    display: none
   }
   p#winner {
     text-align: center;
@@ -54,140 +90,138 @@
   }
   div.collection {
     position: absolute;
-    top: .5vw;
+    top: .5vh;
     z-index: -1;
   }
   div#playerContainer {
     float: left;
-    left: 1vw;
+    left: 1vh;
   }
   div#botContainer {
     float: right;
-    right: 1vw
+    right: 1vh
   }
-  div.collection table tr div {
-    display: inline-block;
+  div#deckAndBattle {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0
   }
   div#deck {
-    position: absolute;
-    bottom: 0;
-    width: 99%;
-    height: 21.5vw;
-    padding-top: 5vw;
-    overflow: hidden;
+    width: 100%;
+    left: 0;
   }
-  div#deck table {
+  div#deck > div {
+    background-image: url("images/deck-con.svg");
+    background-size: 100vw 100vh
+  }
+  div#deck div {
     margin-left: auto;
     margin-right: auto;
-    width: 86.78vw;
-    height: 18vw
-  }
-  div#deck img#backdrop {
-    position: absolute;
+    text-align: center;
     bottom: 0;
+  }
+  div#cardsDealt {
+    padding-top: 3vh;
+  }
+  div#cardsDealt > div {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 2vh;
+    border-radius: 8%;
+    box-shadow: .5vw .5vh 1vw grey
+  }
+  div#deckAndBattle > img {
+    position: relative;
+    bottom: -1vh;
     width: 100%;
-    height: 100%;
-    z-index: -1;
+    z-index: 1;
+    margin: 0
   }
   div#battle {
-    position: absolute;
-    width: 99%;
-    height: 18vw;
-    top: 5vw
-  }
-  div#battle table {
-    margin-left: auto;
-    margin-right: auto;
-    height: 18vw;
-    width: 33.312vw;
-  }
-  /*div#deck div#backdrop {
-    background-image: url("images/deck.svg");
-    position: absolute;
-    height: 25vh;
-    width: 100vw;
-    bottom: 0;
-    z-index: -1;
-    background-repeat: no-repeat;
-    background-size: contain
-  }*/
-  /*div#battle {
     width: 100%;
-    height: 100%
-  }
-  div#shadow {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
     left: 0;
-    z-index: 3;
-    display: none
   }
-  div#battle table {
-    z-index: 4;
-    position: absolute;
+  div#battle > div {
     margin-left: auto;
     margin-right: auto;
-  }*/
-  tr#playerCollection div, tr#botCollection div {
-    width: 5vw;
+    width: 100%;
+  }
+  div#battleCards {
+    margin-left: auto;
+    margin-right: auto;
+    width: 57.2vh
+  }
+  div#battleCards > div {
+    padding-left: 1vh;
+    padding-right: 1vh;
+  }
+  div.collectedCard {
+    display: inline-block;
+    width: 6vw;
     position: relative;
   }
-  div img.frameIcon, div img.elementIcon {
-    width: 100%;
-    height: 100%
+  div.collection > div > div {
+    width: 18vw;
+    background-color: rgba(0, 0, 0, 0.5);
   }
-  div img.elementIcon {
+  img.frameIcon, img.elementIcon {
+    width: 100%;
+    height: 100%;
+    z-index: 2
+  }
+  img.elementIcon {
     position: absolute;
     bottom: 2px;
     left: 0;
-    z-index: 1;
+    z-index: 3;
     transform: scale(0.8);
   }
-  tr#cardsDealt td, tr#battleCards td {
-    padding-left: .7vw;
-    padding-right: .7vw
-  }
-  tr#cardsDealt div, tr#battleCards div {
-    width: 15.956vw;
-    height: 18vw;
+  div#cardsDealt div, div#battleCards div {
+    display: inline-block;
+    text-align: center;
+    width: 26.6vh;
+    height: 30vh;
     position: relative;
-    transition: .25s ease
+    transition: .25s ease;
   }
-  div img.art, div img.frame {
+  div#cardsDealt div {
+    max-width: 26.6vw;
+    max-height: 30vw;
+  }
+  img.art, img.frame {
     width: 100%;
-    height: 100%
+    height: 100%;
+    border-radius: 2vh
   }
-  div img.art {
-    border-radius: 2vw
-  }
-  div img.frame {
+  img.frame {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1
   }
-  div img.element {
+  img.element {
     position: absolute;
     z-index: 2;
-    top: 0.5vw;
-    left: 0.25vw;
-    width: 4vw
+    top: 1%;
+    left: 1%;
+    width: 26%
   }
-  div img.power {
+  img.power {
     position: absolute;
     z-index: 2;
-    top: 4.75vw;
-    left: 1vw;
-    width: 3vw
+    bottom: 58%;
+    left: 4%;
+    width: 20%;
   }
-  tr#cardsDealt div:hover {
-    transform: scale(1.15);
+  div#cardsDealt > div:hover {
+    transform: scale(1.05);
     cursor: pointer;
   }
-  tr#cardsDealt div:active {
-    opacity: 0
+  div#cardsDealt > div:active {
+    opacity: 0.25
+  }
+  div#lost {
+    filter: grayscale(100%);
   }
 </style>

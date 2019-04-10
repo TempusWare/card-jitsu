@@ -202,6 +202,7 @@ function pickCard(number) {
   // Judge the player's card against the bot's card
   judge();
   // Replace the cards used with new cards
+  //setTimeout(function() {updateTable()}, 1000);
   playerCards[number] = dealCards();
   botCards[number] = dealCards();
 
@@ -236,7 +237,7 @@ function botAl() {
           return botCards[i];
           break;
         } else /* If no water card, return random card */ {
-          return botCards[Math.floor(Math.random() * 5)];
+          return botCards[Math.floor(Math.random() * deckLength)];
         }
       }
     };
@@ -248,7 +249,7 @@ function botAl() {
           return botCards[i];
           break;
         } else /* If no water card, return random card */ {
-          return botCards[Math.floor(Math.random() * 5)];
+          return botCards[Math.floor(Math.random() * deckLength)];
         }
       }
     };
@@ -260,13 +261,13 @@ function botAl() {
           return botCards[i];
           break;
         } else /* If no water card, return random card */ {
-          return botCards[Math.floor(Math.random() * 5)];
+          return botCards[Math.floor(Math.random() * deckLength)];
         }
       }
     };
   } else {
     // If the bot has not won a game yet, randomly select a card
-     return botCards[Math.floor(Math.random() * 5)];
+     return botCards[Math.floor(Math.random() * deckLength)];
   }
 };
 
@@ -408,10 +409,7 @@ function checkCollection(collection, winner) {
         for (var w = 0; w < waterColours.length; w++) {
           // If the player/bot's collection can be arranged to find a different colour for every element
           if (fireColours[f] != snowColours[s] && fireColours[f] != waterColours[w] && waterColours[w] != snowColours[s]) {
-            // DISPLAY: Alert Winner
-            try {
-              victory(winner);
-            } catch (e) {} finally {};
+            gameWon = true;
             break loop1;
           }
         }
@@ -420,25 +418,24 @@ function checkCollection(collection, winner) {
   };
   // Check if the player/bot has three or more fire cards collected and then look for three different coloured cards
   if (fireColours.length >= 3) {if (diffColours(fireColours)) {
-    // DISPLAY: Alert Winner
-    try {
-      victory(winner);
-    } catch (e) {} finally {};
+    gameWon = true;
   }};
   // Check if the player/bot has three or more snow cards collected and then look for three different coloured cards
   if (snowColours.length >= 3) {if (diffColours(snowColours)) {
-    // DISPLAY: Alert Winner
-    try {
-      victory(winner);
-    } catch (e) {} finally {};
+    gameWon = true;
   }};
   // Check if the player/bot has three or more water cards collected and then look for three different coloured cards
   if (waterColours.length >= 3) {if (diffColours(waterColours)) {
+    gameWon = true;
+  }};
+
+  //
+  if (gameWon) {
     // DISPLAY: Alert Winner
     try {
       victory(winner);
     } catch (e) {} finally {};
-  }};
+  }
 };
 
 // Check if an element collected has three different coloured cards

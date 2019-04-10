@@ -10,9 +10,9 @@ function updateTable() {
   while (table.firstChild) {
     table.removeChild(table.firstChild)
   };
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < deckLength; i++) {
     // Create elements
-    var cell = document.createElement("td");
+    var cell = document.createElement("div");
     var card = document.createElement("div");
     var art = document.createElement("img");
     var frame = document.createElement("img");
@@ -23,12 +23,7 @@ function updateTable() {
     frame.className = "frame";
     element.className = "element";
     power.className = "power";
-    // Add unique things
-    //cell.innerHTML = "ID: " + playerCards[i];
-    //cell.id = "card" + (i + 1);
     cell.id = i;
-    //card.onclick = function () {var choice = this.id; pickCard(choice)}
-    //cell.onclick = function () {pickCard(i)};
     art.src = cards[playerCards[i]].image;
     frame.src = "images/" + cards[playerCards[i]].colour + ".svg";
     element.src = "images/" + cards[playerCards[i]].element + ".svg";
@@ -41,7 +36,7 @@ function updateTable() {
     card.appendChild(element);
     card.appendChild(power);
   };
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < deckLength; i++) {
     document.getElementById(i).onclick = function () {pickCard(this.id)};
   }
 };
@@ -55,7 +50,7 @@ function displayBattle(winner) {
     table.removeChild(table.firstChild)
   };
   // Player's card
-  var cell = document.createElement("td");
+  var cell = document.createElement("div");
   var card = document.createElement("div");
   var art = document.createElement("img");
   var frame = document.createElement("img");
@@ -74,10 +69,13 @@ function displayBattle(winner) {
     frame.src = "images/" + cards[playerCardId].colour + ".svg";
     element.src = "images/" + playerElement + ".svg";
     power.src = "images/" + playerPower + ".png";
+    // Add shadow if winner is not the player
+    if (winner != "player") {
+      card.id = "lost";
+    };
   } catch (e) {
     frame.src = "images/card.svg";
   } finally {}
-
   // Append cards to table
   table.appendChild(cell);
   cell.appendChild(card);
@@ -87,7 +85,7 @@ function displayBattle(winner) {
   card.appendChild(power);
 
   // Bot's card
-  var cell = document.createElement("td");
+  var cell = document.createElement("div");
   var card = document.createElement("div");
   var art = document.createElement("img");
   var frame = document.createElement("img");
@@ -106,6 +104,10 @@ function displayBattle(winner) {
     frame.src = "images/" + cards[botCardId].colour + ".svg";
     element.src = "images/" + botElement + ".svg";
     power.src = "images/" + botPower + ".png";
+    // Add shadow if bot is not the player
+    if (winner != "bot") {
+      card.id = "lost";
+    };
   } catch (e) {
     frame.src = "images/card.svg";
   } finally {};
@@ -152,51 +154,69 @@ displayBattle();
 
 // Display collections
 function displayCollections() {
-  createCollectionTable(document.getElementById("playerCollection"), playerCollection);
-  createCollectionTable(document.getElementById("botCollection"), botCollection);
-}
+  createColtable(playerCollection, "p");
+  createColtable(botCollection, "b");
+};
 
-function createCollectionTable(table, array) {
-  // Clear table
-  while (table.firstChild) {
-    table.removeChild(table.firstChild)
+function createColtable(collection, prefix) {
+  var colFire = document.getElementById(prefix + "colFire");
+  var colSnow = document.getElementById(prefix + "colSnow");
+  var colWater = document.getElementById(prefix + "colWater");
+
+  // Clear tables
+  while (colFire.firstChild) {
+    colFire.removeChild(colFire.firstChild)
+  };
+  while (colSnow.firstChild) {
+    colSnow.removeChild(colSnow.firstChild)
+  };
+  while (colWater.firstChild) {
+    colWater.removeChild(colWater.firstChild)
   };
 
-  // Create table
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < collection.length; i++) {
     // Create elements
-    var cell = document.createElement("td");
     var card = document.createElement("div");
+    card.className = "collectedCard";
     var frame = document.createElement("img");
     var element = document.createElement("img");
     // Assign classes for CSS
     frame.className = "frameIcon";
     element.className = "elementIcon";
-    // Add unique things
-    frame.src = "images/icon_" + cards[array[i]].colour + ".svg";
-    element.src = "images/" + cards[array[i]].element + ".svg";
-    // Append cards to table
-    table.appendChild(cell);
-    cell.appendChild(card);
-    card.appendChild(frame);
-    card.appendChild(element);
-  };
+    if (cards[collection[i]].element == elements[0]) {
+      frame.src = "images/icon_" + cards[collection[i]].colour + ".svg";
+      element.src = "images/" + cards[collection[i]].element + ".svg";
+      // Append cards to table
+      colFire.appendChild(card);
+      card.appendChild(frame);
+      card.appendChild(element);
+    };
+    if (cards[collection[i]].element == elements[1]) {
+      frame.src = "images/icon_" + cards[collection[i]].colour + ".svg";
+      element.src = "images/" + cards[collection[i]].element + ".svg";
+      // Append cards to table
+      colSnow.appendChild(card);
+      card.appendChild(frame);
+      card.appendChild(element);
+    };
+    if (cards[collection[i]].element == elements[2]) {
+      frame.src = "images/icon_" + cards[collection[i]].colour + ".svg";
+      element.src = "images/" + cards[collection[i]].element + ".svg";
+      // Append cards to table
+      colWater.appendChild(card);
+      card.appendChild(frame);
+      card.appendChild(element);
+    };
+  }
 }
 
 function victory(winner) {
-  setTimeout(function() {
-    var reload = setTimeout(function() {confirm("Winner: " + winner.toUpperCase() + "\n\nNew game?")}, 100);
-    if (reload == true) {location.reload()}}, 100);
-
+  var winnerText = document.getElementById("gameEnd");
+  var seconds = document.getElementById("newGame");
+  winnerText.style.display = "block";
+  winnerText.children[0].innerHTML = "WINNER: " + winner.toUpperCase();
+    //winnerText.children[0].style.display = "block"
+  setTimeout(function() {seconds.innerHTML = "New game in 2..."}, 1000);
+  setTimeout(function() {seconds.innerHTML = "New game in 1..."}, 2000);
+  setTimeout(function() {seconds.innerHTML = "New game in 0..."; location.reload()}, 3000)
 }
-
-// Display player's chosen card next to bot's chosen card
-
-/*function displayCards(playerCard, botCard) {
-  var playerBattle = document.getElementById("playerBattle");
-  var botBattle = document.getElementById("botBattle");
-  playerBattle.src = cards[playerCard].image;
-  playerBattle.src = "images/" + cards[playerCard].colour + ".svg";
-  botBattle.src = cards[botCard].image;
-  botBattle.src = "images/" + cards[botCard].colour + ".svg";
-};*/

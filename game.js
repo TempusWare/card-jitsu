@@ -1,5 +1,5 @@
 // Initialize variable for 'Has the bot won a game yet?' which is no by default
-var hasBotWon = false;
+var hasBotWon;
 
 // Initialize array for cards the player has collected after winning a match, which is empty by default
 var playerCollection = [];
@@ -7,11 +7,14 @@ var playerCollection = [];
 // Initialize array for cards the bot has collected after winning a match, which is empty by default
 var botCollection = [];
 
-// Deal 5 cards to the player
-var playerCards = [dealCards(), dealCards(), dealCards(), dealCards(), dealCards()];
-
-// Deal 5 cards to the bot
-var botCards = [dealCards(), dealCards(), dealCards(), dealCards(), dealCards()];
+// Deal cards to each deck
+var playerCards = [];
+var botCards = [];
+var deckLength = 5;
+for (var i = 0; i < deckLength; i++) {
+  playerCards.push(dealCards());
+  botCards.push(dealCards());
+};
 
 // Initialize variables for the id and other of the card chosen by the player, which is undefined by default
 var playerCardId;
@@ -22,3 +25,6 @@ var playerPower;
 var botCardId;
 var botElement;
 var botPower;
+
+// Initalize variable for 'Has anyone won?'
+var gameWon;
