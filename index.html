@@ -2,224 +2,83 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Card-Jitsu</title>
+    <title>Card-Jitsu HTML5</title>
     <script type="text/javascript" src="engine.js"></script>
+    <script type="text/javascript" src="cards.js"></script>
     <script type="text/javascript" src="setup.js"></script>
+    <link rel="icon" href="logo.png">
   </head>
   <body>
-    <div id="deckAndBattle">
-      <div id="winnerCon">
-        <p id="winner"></p>
+    <div id="banner">
+      <h1>Card-Jitsu HTML5</h1>
+      <h2>Created by TempusWare</h2>
+    </div>
+    <div id="game">
+      <div id="tophalf">
+        <!-- Player collection card icons (elements and colours) -->
+        <div id="playerCollection">
+          <div id="colPlayerFire"></div>
+          <div id="colPlayerSnow"></div>
+          <div id="colPlayerWater"></div>
+        </div>
+        <!-- Player's card vs Bot's card -->
+        <div id="battleContainer">
+          <div id="battle">
+            <!--<div class="battleBlock"></div>-->
+            <div id="cardPlayer">
+              <img class="art" src="images/card.svg">
+              <img class="frame">
+              <img class="element">
+              <img class="power">
+            </div>
+            <div id="versus">
+              <p>VS</p>
+            </div>
+            <div id="cardBot">
+              <img class="art" src="images/card.svg">
+              <img class="frame">
+              <img class="element">
+              <img class="power">
+            </div>
+            <!--<div class="battleBlock"></div>-->
+          </div>
+        </div>
+        <!-- Bot collection card icons (elements and colours) -->
+        <div id="botCollection">
+          <div id="colBotFire"></div>
+          <div id="colBotSnow"></div>
+          <div id="colBotWater"></div>
+        </div>
       </div>
-      <div id="battle">
-        <div><div id="battleCards"></div></div>
-      </div>
-      <img src="images/deck-lid.svg">
-      <div id="deck">
-        <div><div id="cardsDealt"></div></div>
+      <!-- Deck and container -->
+      <div id="entireDeck">
+        <img src="images/deck-lid.svg" id="decklid">
+        <!-- Deck of cards dealt to the player -->
+        <div id="deckContainer"><div id="deck"></div></div>
       </div>
     </div>
-    <div class="collection" id="playerContainer">
-      <div>
-        <div id="pcolFire"></div>
-        <div id="pcolSnow"></div>
-        <div id="pcolWater"></div>
+    <!-- Game Won Display -->
+    <div id="winningCards">
+      <div id="winCards">
+        <div class="icon" id="wc0">
+          <img class="frameIcon">
+          <img class="elementIcon">
+        </div>
+        <div class="icon" id="wc1">
+          <img class="frameIcon">
+          <img class="elementIcon">
+        </div>
+        <div class="icon" id="wc2">
+          <img class="frameIcon">
+          <img class="elementIcon">
+        </div>
       </div>
-    </div>
-    <div class="collection" id="botContainer">
-      <div>
-        <div id="bcolFire"></div>
-        <div id="bcolSnow"></div>
-        <div id="bcolWater"></div>
+      <div id="winText">
+        <p id="winTextA">[Winner] Wins</p>
+        <p id="winTextB">Click anywhere to start a new game</p>
       </div>
-    </div>
-    <div id="gameEnd">
-      <p>Winner Text</p>
-      <p id="newGame">New game in 3...</p>
     </div>
   </body>
+  <script type="text/javascript" src="design.js"></script>
 </html>
-<script type="text/javascript" src="design.js"></script>
-<style media="screen">
-  * {
-    user-select: none;
-  }
-  body {
-    background-image: url("images/dojo.svg");
-    background-repeat: no-repeat;
-    background-position: top;
-    background-size: auto;
-    overflow: hidden;
-  }
-  div#gameEnd {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 6;
-    display: none;
-    left: 0;
-    top: 0;
-    padding-top: 30vh;
-  }
-  div#gameEnd > p {
-    font-size: 10vh;
-    text-align: center;
-    color: white;
-    font-family: Arial;
-    text-shadow: 0 0 5vh black;
-  }
-  div#gameEnd > p#newGame {
-    font-size: 5vh;
-  }
-  div#winnerCon {
-    position: absolute;
-    width: 99%;
-    height: 5vh;
-    z-index: 3;
-    top: 0;
-    display: none
-  }
-  p#winner {
-    text-align: center;
-    font-size: 4vh;
-    font-family: Arial;
-    color: white
-  }
-  div.collection {
-    position: absolute;
-    top: .5vh;
-    z-index: -1;
-  }
-  div#playerContainer {
-    float: left;
-    left: 1vh;
-  }
-  div#botContainer {
-    float: right;
-    right: 1vh
-  }
-  div#deckAndBattle {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0
-  }
-  div#deck {
-    width: 100%;
-    left: 0;
-  }
-  div#deck > div {
-    background-image: url("images/deck-con.svg");
-    background-size: 100vw 100vh
-  }
-  div#deck div {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    bottom: 0;
-  }
-  div#cardsDealt {
-    padding-top: 3vh;
-  }
-  div#cardsDealt > div {
-    margin-left: 1vw;
-    margin-right: 1vw;
-    margin-bottom: 2vh;
-    border-radius: 8%;
-    box-shadow: .5vw .5vh 1vw grey
-  }
-  div#deckAndBattle > img {
-    position: relative;
-    bottom: -1vh;
-    width: 100%;
-    z-index: 1;
-    margin: 0
-  }
-  div#battle {
-    width: 100%;
-    left: 0;
-  }
-  div#battle > div {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
-  div#battleCards {
-    margin-left: auto;
-    margin-right: auto;
-    width: 39.46vh;
-  }
-  div#battleCards > div {
-    padding-left: 1vh;
-    padding-right: 1vh;
-  }
-  div.collectedCard {
-    display: inline-block;
-    width: 6vw;
-    position: relative;
-  }
-  div.collection > div > div {
-    width: 18vw;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  img.frameIcon, img.elementIcon {
-    width: 100%;
-    height: 100%;
-    z-index: 2
-  }
-  img.elementIcon {
-    position: absolute;
-    bottom: 2px;
-    left: 0;
-    z-index: 3;
-    transform: scale(0.8);
-  }
-  div#cardsDealt div, div#battleCards div {
-    display: inline-block;
-    text-align: center;
-    width: 17.73vh;
-    height: 20vh;
-    position: relative;
-    transition: .25s ease;
-  }
-  div#cardsDealt div {
-    max-width: 26.6vw;
-    max-height: 30vw;
-  }
-  img.art, img.frame {
-    width: 100%;
-    height: 100%;
-    border-radius: 2vh
-  }
-  img.frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1
-  }
-  img.element {
-    position: absolute;
-    z-index: 2;
-    top: 1%;
-    left: 1%;
-    width: 26%
-  }
-  img.power {
-    position: absolute;
-    z-index: 2;
-    bottom: 58%;
-    left: 4%;
-    width: 20%;
-  }
-  div#cardsDealt > div:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-  div#cardsDealt > div:active {
-    opacity: 0.25
-  }
-  div#lost {
-    filter: grayscale(100%);
-  }
-</style>
+<link rel="stylesheet" href="design.css">

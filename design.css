@@ -1,0 +1,326 @@
+* {
+  user-select: none;
+}
+body {
+  background-image: url("images/dojo.svg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: auto;
+  overflow: hidden;
+}
+
+/* Banner display */
+#banner {
+  position: relative;
+  height: 20vh;
+}
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  color: white;
+  font-family: Arial
+}
+h1 {
+  font-size: 10vh;
+}
+h2 {
+  font-size: 4vh;
+}
+/* Game display container */
+#game {
+  position: absolute;
+  bottom: 0;
+  height: 80vh;
+  left: 0;
+  right: 0;
+}
+
+/* Deck container */
+#entireDeck {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/* Deck of cards */
+#deckContainer {
+  position: relative;
+  border: 1px solid black;
+  height: 22.56vh;
+  /*position: absolute;*/
+  /*bottom: 0;
+  left: 0;
+  right: 0;*/
+}
+#deck {
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  overflow: hidden;
+  background-image: url("images/deck-con.svg");
+  background-size: 100% 100vh
+}
+
+/* Battle display (Player vs. Bot) */
+#battleContainer {
+  position: relative;
+  top: -10px;
+  left: 50vw;
+  margin-left: -25vw;
+  /*border: 1px solid black;*/
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+#battle {
+  height: 100%;
+}
+
+/* Versus Text in Battle Display */
+#versus {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 3
+}
+#versus > p {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-family: Arial;
+  font-size: 12.5vh;
+  margin-top: -7vh;
+  color: white;
+  /*text-shadow: 0 0 2vh black;*/
+}
+
+/* Individual cards within the deck */
+#deck > div, #cardPlayer, #cardBot {
+  position: relative;
+  transform: scale(0.9);
+  box-shadow: 0 0 2vh grey;
+  transition: .25s ease;
+}
+/* Player card */
+#cardPlayer {
+}
+/* Bot card */
+#cardBot {
+}
+/* Deck cards size */
+#deck > div {
+  width: 20vh;
+  height: 100%;
+  display: inline-block;
+}
+/* Battle cards size */
+#cardPlayer, #cardBot {
+  width: 35vh;
+  top: 6.25%;
+  height: 87.5%;
+  display: inline-block;
+  position: absolute;
+}
+#cardPlayer {
+  /*float: left;*/
+  left: 0
+}
+#cardBot {
+  /*float: right;*/
+  right: 0
+}
+#deck > div {
+  position: absolute;
+  margin-left: -10vh
+}
+/* Rounded corners of cards */
+#deck > div, #cardPlayer, #cardBot, .frame, .art {
+  border-radius: 6.373%;
+}
+/* Selected/Hovered-over card */
+#deck > div:hover {
+  transform: scale(1);
+  cursor: pointer;
+}
+/* Clicked on card */
+#deck > div:active {
+  transform: scale(.9);
+  opacity: .2
+}
+/* Images such as art or elements of a card */
+#deck > div > img, #battle > div > img {
+  position: absolute;
+}
+/* Card positions within deck div */
+div#c0 {
+  left: 16.7%;
+}
+div#c1 {
+  left: 33.3%;
+}
+div#c2 {
+  left: 50%;
+}
+div#c3 {
+  left: 66.7%;
+}
+div#c4 {
+  left: 83.3%;
+}
+/* Card art */
+.art {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%
+}
+/* Card frame */
+.frame {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+/* Card element */
+.element {
+  z-index: 3;
+  width: 26%;
+  left: 1%;
+  top: 1%;
+}
+/* Card power */
+.power {
+  z-index: 3;
+  width: 20%;
+  left: 4%;
+  bottom: 58%
+}
+
+/* Collection containers */
+#playerCollection, #botCollection {
+  position: absolute;
+  /*border: 1px solid black;*/
+  height: 45.12vh;
+  width: 25%;
+  top: 0;
+  margin-top: -1vh
+}
+/* Player collection container */
+#playerCollection {
+  left: 0;
+}
+/* Bot collection container */
+#botCollection {
+  right: 0;
+}
+/* Player collection card containers */
+#colPlayerFire, #colPlayerSnow, #colPlayerWater, #colBotFire, #colBotSnow, #colBotWater {
+  /*display: inline-block;*/
+  vertical-align: top;
+  width: 33%;
+  max-width: 5vw;
+  height: 100%;
+  position: absolute;
+}
+#colPlayerFire, #colBotFire {
+  left: 15%
+}
+#colPlayerSnow, #colBotSnow {
+  left: 40%
+}
+#colPlayerWater, #colBotWater {
+  left: 65%
+}
+/* Card Collection Icons */
+.icon {
+  position: relative;
+  width: 100%;
+}
+/* Card Collection Icon Images*/
+img.frameIcon, img.elementIcon {
+  width: 100%;
+  height: 100%;
+}
+img.frameIcon {
+  z-index: 2;
+}
+img.elementIcon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  transform: scale(.8);
+}
+
+/* Top half div (Battle Display and Collections Displays) */
+#tophalf {
+  height: 45.12vh;
+  width: 100%;
+}
+
+/* Game Won Display */
+div#winningCards {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  display: none;
+}
+div#winCards {
+  position: relative;
+  top: 34vh;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#winCards > div.icon {
+  width: 32%;
+  display: inline-block;
+}
+div#winText {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+  height: 100%;
+}
+div#winText > p {
+  position: absolute;
+  text-align: center;
+  font-family: Arial;
+  width: 100%;
+  color: white
+}
+p#winTextA {
+  height: 15vh;
+  font-size: 15vh;
+  bottom: 53vh;
+}
+p#winTextB {
+  height: 7vh;
+  font-size: 7vh;
+  bottom: 1vh;
+  opacity: 0;
+  transition: 1s ease
+}
+/*div#wc0 {
+  margin-left: 17.25%;
+  margin-right: 5%
+}
+div#wc1 {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+div#wc2 {
+  margin-left: 5%;
+  margin-right: 17.25%
+}*/
+#decklid {
+  margin-bottom: -5px;
+  height: 20%;
+  width: 100%;
+}

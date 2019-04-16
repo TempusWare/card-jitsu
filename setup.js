@@ -28,3 +28,17 @@ var botPower;
 
 // Initalize variable for 'Has anyone won?'
 var gameWon;
+
+// Initialize variable for the way the match was won (Elemental or One element win)
+var winWay;
+
+// Define variables and arrays
+var firePC; var snowPC; var waterPC; var fireBC; var snowBC; var waterBC;
+var fireColoursPC = []; var snowColoursPC = []; var waterColoursPC = [];
+var fireColoursBC = []; var snowColoursBC = []; var waterColoursBC = [];
+
+// Initialize variable for the final winner of the game
+var gameWinner;
+
+// Initialize array for winning cards
+var winningCards = [];
